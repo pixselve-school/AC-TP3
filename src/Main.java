@@ -8,8 +8,10 @@ public class Main {
 
   public static void main(String[] args) {
 //    exerice1();
-    exercice2();
-    exercice3();
+//    exercice2();
+//    exercice3();
+//    exercice5();
+    exercice6();
   }
 
   private static void exerice1() {
@@ -63,5 +65,21 @@ public class Main {
 
     Expression expression2 = new Non(new Constante(false));
     System.out.println(expression2.estVrai());
+  }
+
+  public static void exercice5() {
+    Expression expression = new Ou(new Equiv(new Atome("x"), new Atome("y")), new Et(new Atome("z"), new Atome("y")));
+    List<String> ordre_atomes = new LinkedList<String>();
+    ordre_atomes.add("x");
+    ordre_atomes.add("y");
+    ordre_atomes.add("z");
+    System.out.println("Arbre de f avec ordre x > y > z : \n" + expression.arbre(ordre_atomes));
+    System.out.println(expression.robdd());
+
+  }
+
+  public static void exercice6() {
+    Expression expression = new Ou(new Equiv(new Atome("x"), new Atome("y")), new Et(new Atome("z"), new Atome("y")));
+    System.out.println(expression.robdd().trouve_sat());
   }
 }

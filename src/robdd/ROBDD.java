@@ -45,4 +45,31 @@ public class ROBDD {
     }
     return -1;
   }
+
+  public Noeud_ROBDD findNodeWithChildId(int id) {
+    for (Noeud_ROBDD noeud_robdd : R) {
+      if (noeud_robdd.getIdFilsGauche() == id || noeud_robdd.getIdFilsDroit() == id) {
+        return noeud_robdd;
+      }
+    }
+    throw new RuntimeException("No node found with child id " + id);
+  }
+
+  public String trouve_sat() {
+    int id = 1;
+    StringBuilder sat = new StringBuilder();
+    while (id != this.nb_noeuds() - 1) {
+      Noeud_ROBDD noeud_robdd = findNodeWithChildId(id);
+      if (noeud_robdd.getIdFilsGauche() == id) {
+        sat.append("¬").append(noeud_robdd.getNom()).append(" ");
+      } else {
+        sat.append(noeud_robdd.getNom()).append(" ");
+      }
+      id = noeud_robdd.getId();
+      if (id == 0) {
+        return "Le ROBDD est faux";
+      }
+    }
+    return sat.toString();
+  }
 }

@@ -25,7 +25,7 @@ public class Atome extends Expression {
     if (this.name.equals(s)) {
       return new Constante(b);
     } else {
-      return this;
+      return new Atome(this.name);
     }
   }
 
