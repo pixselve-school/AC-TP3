@@ -29,11 +29,11 @@ public abstract class Expression {
 
 
 	public boolean estVrai(){
-		return this.evalue();
+		return false;
 	}
 	
 	public boolean estFaux(){
-		return !this.evalue();
+		return false;
 	}
 
 	//construit l'arbre de shannon correspondant à l'expression courante en prenant comme ordre l'ordre indiqué par l'argument ordre_atomes

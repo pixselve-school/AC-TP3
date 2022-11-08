@@ -5,26 +5,35 @@ import java.util.Set;
 
 public class Constante extends Expression {
 
-	private boolean b;
-	
-	public Constante(boolean b) {
-		this.b = b;
-	}
-	
-	public boolean evalue() throws RuntimeException {
-		return b;
-	}
+  private boolean b;
 
-	public Set<String> atomes() {
-		return new HashSet<String>();
-	}
+  public Constante(boolean b) {
+    this.b = b;
+  }
 
-	public Expression remplace(String s, boolean b) {
-		return new Constante(this.b);
-	}
+  public boolean evalue() throws RuntimeException {
+    return b;
+  }
 
-	public Expression simplifier(){
-		return this;
-	}
+  public Set<String> atomes() {
+    return new HashSet<String>();
+  }
 
+  public Expression remplace(String s, boolean b) {
+    return new Constante(this.b);
+  }
+
+  public Expression simplifier() {
+    return this;
+  }
+
+  @Override
+  public boolean estVrai() {
+    return this.b;
+  }
+
+  @Override
+  public boolean estFaux() {
+    return !this.b;
+  }
 }
