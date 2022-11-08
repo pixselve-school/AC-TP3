@@ -9,6 +9,7 @@ public class Main {
   public static void main(String[] args) {
 //    exerice1();
     exercice2();
+    exercice3();
   }
 
   private static void exerice1() {
@@ -54,5 +55,13 @@ public class Main {
     expression = expression.remplace("x_2", true);
     expression = expression.remplace("y_2", true);
     System.out.println(expression.evalue());
+  }
+
+  public static void exercice3() {
+    Expression expression = new Constante(true);
+    System.out.println(expression.estVrai());
+
+    Expression expression2 = new Non(new Constante(false));
+    System.out.println(expression2.estVrai());
   }
 }
