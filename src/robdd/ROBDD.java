@@ -1,5 +1,8 @@
 package robdd;
 
+import expression.AtomeCoord;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -71,5 +74,28 @@ public class ROBDD {
       }
     }
     return sat.toString();
+  }
+  public String reines_affiche_sat(int n){
+    Grid grid = new Grid(n);
+
+    int id = 1;
+    while (id != this.nb_noeuds() - 1) {
+      Noeud_ROBDD noeud_robdd = findNodeWithChildId(id);
+      if (noeud_robdd.getIdFilsGauche() == id) {
+        ;
+      } else {
+        String name = noeud_robdd.getNom();
+        String[] coords = name.split("_");
+        int i = Integer.parseInt(coords[0]);
+        int j = Integer.parseInt(coords[1]);
+        grid.addQueen(i, j);
+      }
+      id = noeud_robdd.getId();
+      if (id == 0) {
+        return "Le ROBDD est faux";
+      }
+    }
+
+    return grid.toString();
   }
 }
