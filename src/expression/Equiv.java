@@ -41,4 +41,8 @@ public class Equiv extends Expression {
     return new Equiv(e1.remplace(s, b), e2.remplace(s, b));
   }
 
+  @Override
+  public String toString(String t) {
+    return t + "(\n"+e1.toString(t + '\t')+"\n"+t+"<=>\n"+e2.toString(t + '\t')+"\n"+t+")";
+  }
 }

@@ -30,5 +30,9 @@ public class Non extends Expression {
 			return new Constante(true);
 		return this;
 	}
-	
+
+	@Override
+	public String toString(String t) {
+		return t + "!(\n"+e.toString(t + '\n')+"\n"+t+")";
+	}
 }
