@@ -19,7 +19,7 @@ public class Grid {
   public String toString() {
     StringBuilder horizontalLine = new StringBuilder();
     // vertical line
-    horizontalLine.append("-".repeat(this.taille * 2 + 1));
+    horizontalLine.append("-".repeat(this.taille * 4 + 1));
 
     StringBuilder result = new StringBuilder();
     result.append(horizontalLine);
@@ -28,9 +28,9 @@ public class Grid {
       for (int column = 0; column < this.taille; column++) {
         result.append('|');
         if (queens.contains(new Pair(line, column))) {
-          result.append('Q');
+          result.append(" X ");
         } else {
-          result.append(' ');
+          result.append("   ");
         }
       }
       result.append('|');

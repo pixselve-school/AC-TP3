@@ -92,7 +92,7 @@ public class Main {
 //    System.out.println(expression.arbre(expression.atomes().stream().toList()).toString());
 //    System.out.println();
 //    System.out.println(expression.robdd().toString());
-    System.out.println(expression.robdd().trouve_sat());
+    System.out.println(expression.robdd().reines_affiche_sat(n));
   }
 
   public static Expression cell(int i, int j, int n){

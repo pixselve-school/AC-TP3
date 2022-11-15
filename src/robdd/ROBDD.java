@@ -1,6 +1,7 @@
 package robdd;
 
 import expression.AtomeCoord;
+import utils.Grid;
 
 import java.util.ArrayList;
 import java.util.Iterator;
