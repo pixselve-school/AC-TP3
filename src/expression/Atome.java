@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Atome extends Expression {
 
-  private String name;
+  protected String name;
 
   public Atome(String s) {
     this.name = new String(s);

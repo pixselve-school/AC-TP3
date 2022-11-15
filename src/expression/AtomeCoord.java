@@ -18,4 +18,13 @@ public class AtomeCoord extends Atome {
   public int getColumn() {
     return column;
   }
+
+  @Override
+  public Expression remplace(String s, boolean b) {
+    if (this.name.equals(s)) {
+      return new Constante(b);
+    } else {
+      return new AtomeCoord(this.line, this.column);
+    }
+  }
 }
