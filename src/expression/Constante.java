@@ -36,4 +36,9 @@ public class Constante extends Expression {
   public boolean estFaux() {
     return !this.b;
   }
+
+  @Override
+  public String toString(String t) {
+    return t + String.valueOf(b);
+  }
 }

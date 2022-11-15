@@ -106,4 +106,8 @@ public abstract class Expression {
     return robdd(new LinkedList<String>(this.atomes()));
   }
 
+  public String toString(){
+    return toString("");
+  }
+  public abstract String toString(String tab);
 }

@@ -33,4 +33,8 @@ public class Atome extends Expression {
     return this;
   }
 
+  @Override
+  public String toString(String t) {
+    return t + this.name;
+  }
 }
