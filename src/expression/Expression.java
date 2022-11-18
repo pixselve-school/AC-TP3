@@ -1,15 +1,27 @@
 package expression;
 
-import arbre.*;
-import robdd.*;
+import arbre.ArbreShannon;
+import arbre.FeuilleShannon;
+import arbre.NoeudShannon;
+import robdd.Noeud_ROBDD;
+import robdd.ROBDD;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.HashSet;
 import java.util.Set;
 
 
 public abstract class Expression {
+
+  private static String max_variable(Set<String> atomes, List<String> atomes_ordonnes) {
+    for (String atomes_ordonne : atomes_ordonnes) {
+      if (atomes.contains(atomes_ordonne)) {
+        return atomes_ordonne;
+      }
+    }
+    throw new RuntimeException("max_variable: atomes_ordonnes ne contient pas tous les atomes de atomes");
+  }
 
   //renvoie la liste (non ordonnées) des atomes associées à l'objet courant
   public abstract Set<String> atomes();
@@ -25,7 +37,6 @@ public abstract class Expression {
   //renvoie une version simplifiée de l'expression this
   //selon les règles du tableau du TD 5, partie 2.3
   public abstract Expression simplifier();
-
 
   public boolean estVrai() {
     return false;
@@ -90,24 +101,14 @@ public abstract class Expression {
     return id;
   }
 
-  private static String max_variable(Set<String> atomes, List<String> atomes_ordonnes) {
-    for (String atomes_ordonne : atomes_ordonnes) {
-      if (atomes.contains(atomes_ordonne)) {
-        return atomes_ordonne;
-      }
-      ;
-    }
-    throw new RuntimeException("max_variable: atomes_ordonnes ne contient pas tous les atomes de atomes");
-  }
-
-
   //renvoie le ROBDD correspondant à l'expression courante avec un ordre aléatoire (donné par this.atomes())
   public ROBDD robdd() {
     return robdd(new LinkedList<String>(this.atomes()));
   }
 
-  public String toString(){
+  public String toString() {
     return toString("");
   }
+
   public abstract String toString(String tab);
 }

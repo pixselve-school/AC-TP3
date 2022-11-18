@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 public class Grid {
   private final int taille;
-  private HashSet<Pair> queens;
+  private final HashSet<Pair> queens;
 
   public Grid(int taille) {
     this.taille = taille;

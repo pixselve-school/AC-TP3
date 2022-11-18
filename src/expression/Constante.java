@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Constante extends Expression {
 
-  private boolean b;
+  private final boolean b;
 
   public Constante(boolean b) {
     this.b = b;
@@ -39,6 +39,6 @@ public class Constante extends Expression {
 
   @Override
   public String toString(String t) {
-    return t + String.valueOf(b);
+    return t + b;
   }
 }

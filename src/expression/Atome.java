@@ -8,7 +8,7 @@ public class Atome extends Expression {
   protected String name;
 
   public Atome(String s) {
-    this.name = new String(s);
+    this.name = s;
   }
 
   public boolean evalue() throws RuntimeException {

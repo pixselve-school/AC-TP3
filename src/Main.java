@@ -1,21 +1,21 @@
+import expression.*;
+
 import java.util.LinkedList;
 import java.util.List;
-
-import robdd.ROBDD;
-import expression.*;
 
 public class Main {
 
   public static void main(String[] args) {
-//    exerice1();
+//    exercice1();
 //    exercice2();
 //    exercice3();
 //    exercice5();
 //    exercice6();
-    exercice7();
+//    exercice7();
   }
 
-  private static void exerice1() {
+  private static void exercice1() {
+    System.out.println("================ Exercice 1 ================");
     //EXEMPLE
     Expression exp = new Et(new Atome("x"), new Atome("y")); // représente (x ^ y)
     System.out.println(exp.atomes()); // affiche la liste des atomes (=variables booléennes) présents dans exp
@@ -35,6 +35,7 @@ public class Main {
   }
 
   public static void exercice2() {
+    System.out.println("================ Exercice 2 ================");
     Expression expression = new Et(new Equiv(new Atome("x_1"), new Atome("y_1")), new Equiv(new Atome("x_2"), new Atome("y_2")));
     System.out.println(expression.atomes());
 
@@ -61,6 +62,7 @@ public class Main {
   }
 
   public static void exercice3() {
+    System.out.println("================ Exercice 3 ================");
     Expression expression = new Constante(true);
     System.out.println(expression.estVrai());
 
@@ -69,6 +71,7 @@ public class Main {
   }
 
   public static void exercice5() {
+    System.out.println("================ Exercice 5 ================");
     Expression expression = new Ou(new Equiv(new Atome("x"), new Atome("y")), new Et(new Atome("z"), new Atome("y")));
     List<String> ordre_atomes = new LinkedList<String>();
     ordre_atomes.add("x");
@@ -80,36 +83,41 @@ public class Main {
   }
 
   public static void exercice6() {
+    System.out.println("================ Exercice 6 ================");
     Expression expression = new Ou(new Equiv(new Atome("x"), new Atome("y")), new Et(new Atome("z"), new Atome("y")));
     System.out.println(expression.robdd().trouve_sat());
   }
 
-  public static void exercice7(){
-    int n = 4;
+  public static void exercice7() {
+    System.out.println("================ Exercice 7 ================");
+    int n = 8;
     Expression expression = nReines(n);
-//    System.out.println(expression);
-//    System.out.println();
-//    System.out.println(expression.arbre(expression.atomes().stream().toList()).toString());
-//    System.out.println();
-//    System.out.println(expression.robdd().toString());
     System.out.println(expression.robdd().reines_affiche_sat(n));
   }
 
-  public static Expression cell(int i, int j, int n){
+  /**
+   * Retourne une expression booléenne représentant la contrainte de n-reines pour chaque case de l'échiquier
+   *
+   * @param i ligne
+   * @param j colonne
+   * @param n nombre de lignes et de colonnes
+   * @return expression booléenne représentant la contrainte de n-reines pour la case (i,j)
+   */
+  public static Expression cell(int i, int j, int n) {
     // line
     Expression line = new Constante(true);
-    for(int k=0; k<n; k++){
+    for (int k = 0; k < n; k++) {
       Atome atome = new Atome(k + "_" + j);
-      if(k == i)
+      if (k == i)
         line = new Et(line, atome);
       else
         line = new Et(line, new Non(atome));
     }
     // column
     Expression column = new Constante(true);
-    for(int k=0; k<n; k++){
+    for (int k = 0; k < n; k++) {
       Atome atome = new Atome(i + "_" + k);
-      if(k == j)
+      if (k == j)
         column = new Et(column, atome);
       else
         column = new Et(column, new Non(atome));
@@ -141,9 +149,9 @@ public class Main {
     Expression diag2 = new Constante(true);
     {
       int ii = i, jj = j;
-      while(ii < n && jj >= 0){
+      while (ii < n && jj >= 0) {
         Atome atome = new Atome(ii + "_" + jj);
-        if(ii == i && jj == j)
+        if (ii == i && jj == j)
           diag2 = new Et(diag2, atome);
         else
           diag2 = new Et(diag2, new Non(atome));
@@ -152,9 +160,9 @@ public class Main {
       }
       ii = i;
       jj = j;
-      while(ii >= 0 && jj < n){
+      while (ii >= 0 && jj < n) {
         Atome atome = new Atome(ii + "_" + jj);
-        if(!(ii == i && jj == j))
+        if (!(ii == i && jj == j))
           diag2 = new Et(diag2, new Non(atome));
         ii--;
         jj++;
@@ -165,11 +173,17 @@ public class Main {
     return new Et(new Et(new Et(line, column), diag1), diag2);
   }
 
-  public static Expression nReines(int n){
+  /**
+   * Trouve une solution pour n reines
+   *
+   * @param n nombre de reines
+   * @return l'expression booléenne correspondant à la solution
+   */
+  public static Expression nReines(int n) {
     Expression lines = new Constante(true);
-    for(int i=0; i<n; i++){
+    for (int i = 0; i < n; i++) {
       Expression line = new Constante(false);
-      for(int j=0; j<n; j++){
+      for (int j = 0; j < n; j++) {
         line = new Ou(line, cell(i, j, n));
       }
       lines = new Et(lines, line);

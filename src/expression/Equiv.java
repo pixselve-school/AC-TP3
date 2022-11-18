@@ -43,6 +43,6 @@ public class Equiv extends Expression {
 
   @Override
   public String toString(String t) {
-    return t + "(\n"+e1.toString(t + '\t')+"\n"+t+"<=>\n"+e2.toString(t + '\t')+"\n"+t+")";
+    return t + "(\n" + e1.toString(t + '\t') + "\n" + t + "<=>\n" + e2.toString(t + '\t') + "\n" + t + ")";
   }
 }

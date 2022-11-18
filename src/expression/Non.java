@@ -4,35 +4,35 @@ import java.util.Set;
 
 public class Non extends Expression {
 
-	private Expression e;
-	
-	public Non(Expression e) {
-		this.e = e;
-	}
+  private Expression e;
 
-	public boolean evalue() throws RuntimeException {
-		return !e.evalue();
-	}
+  public Non(Expression e) {
+    this.e = e;
+  }
 
-	public Set<String> atomes() {
-		return e.atomes();
-	}
+  public boolean evalue() throws RuntimeException {
+    return !e.evalue();
+  }
 
-	public Expression remplace(String s, boolean b) {
-		return new Non(e.remplace(s, b));
-	}
+  public Set<String> atomes() {
+    return e.atomes();
+  }
 
-	public Expression simplifier(){
-		e = e.simplifier();
-		if (e.estVrai())
-			return new Constante(false);
-		if (e.estFaux())
-			return new Constante(true);
-		return this;
-	}
+  public Expression remplace(String s, boolean b) {
+    return new Non(e.remplace(s, b));
+  }
 
-	@Override
-	public String toString(String t) {
-		return t + "!(\n"+e.toString(t + '\n')+"\n"+t+")";
-	}
+  public Expression simplifier() {
+    e = e.simplifier();
+    if (e.estVrai())
+      return new Constante(false);
+    if (e.estFaux())
+      return new Constante(true);
+    return this;
+  }
+
+  @Override
+  public String toString(String t) {
+    return t + "!(\n" + e.toString(t + '\n') + "\n" + t + ")";
+  }
 }

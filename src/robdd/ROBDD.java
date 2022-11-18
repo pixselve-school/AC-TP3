@@ -1,10 +1,7 @@
 package robdd;
 
-import expression.AtomeCoord;
 import utils.Grid;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,7 +13,7 @@ public class ROBDD {
   public static final int idTrue = 1;
 
   //liste représentant le ROBDD
-  private List<Noeud_ROBDD> R;
+  private final List<Noeud_ROBDD> R;
 
   //construit un ROBDD vide
   public ROBDD() {
@@ -76,14 +73,14 @@ public class ROBDD {
     }
     return sat.toString();
   }
-  public String reines_affiche_sat(int n){
+
+  public String reines_affiche_sat(int n) {
     Grid grid = new Grid(n);
 
     int id = 1;
     while (id != this.nb_noeuds() - 1) {
       Noeud_ROBDD noeud_robdd = findNodeWithChildId(id);
       if (noeud_robdd.getIdFilsGauche() == id) {
-        ;
       } else {
         String name = noeud_robdd.getNom();
         String[] coords = name.split("_");
